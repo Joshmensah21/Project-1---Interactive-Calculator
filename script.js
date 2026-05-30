@@ -1,7 +1,5 @@
 const display = document.getElementById('display');
 const buttons = document.querySelectorAll('#buttons button');
-console.log(display);
-console.log(buttons);
 
 let currentInput = "";
 let operator=["+","-","*","/"];
@@ -15,6 +13,7 @@ for(const b of buttons){
 
 b.addEventListener('click', function pressed(event){
     let clickedValue=event.target.dataset.value;
+    
     if(!isNaN(parseInt(clickedValue))){
         
         if(currentInput==="0" || shouldReplaceDisplay===true){
@@ -107,6 +106,15 @@ b.addEventListener('click', function pressed(event){
         shouldReplaceDisplay=true;
         display.textContent = "0";
         console.log("Calculator cleared (AC pressed). State reset.");
+    
+    } else if(clickedValue==="squarert"){
+        
+        function squareRoot (){
+        
+            const inputNum = parseInt(currentInput);
+            return Math.sqrt(inputNum);
+        }
+        display.textContent = squareRoot();
     }
 } 
     )

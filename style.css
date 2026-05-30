@@ -29,12 +29,6 @@ body{
     height: 32px;
 }
 
-#buttons{
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 10px;
-}
-
 button{
     border-radius: 12px;
     width: 72px;

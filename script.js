@@ -11,6 +11,24 @@ let calculationResult = null;
 
 for(const b of buttons){
 
+/*else if(clickedValue==="AC"){
+        storedInputOne=null;
+        storedInputTwo=null;
+        storedOperation=null;
+        currentInput=0;
+        shouldReplaceDisplay=true;
+        display.textContent = "0";
+        console.log("Calculator cleared (AC pressed). State reset.");*/
+
+function allClear (){
+        storedInputOne=null;
+        storedInputTwo=null;
+        storedOperation=null;
+        currentInput=0;
+        shouldReplaceDisplay=true;
+        return display.textContent = "0";
+}
+
 b.addEventListener('click', function pressed(event){
     let clickedValue=event.target.dataset.value;
     
@@ -49,8 +67,8 @@ b.addEventListener('click', function pressed(event){
         //checking existence of both a first number and a pending operation
         if(storedInputOne !== null && storedOperation !==null){
             storedInputTwo=currentInput;
-            let convInputOne = Number(storedInputOne);
-            let convInputTwo = Number (storedInputTwo);
+            let convInputOne = Number(storedInputOne); //converted 1st input of calculation into a number
+            let convInputTwo = Number (storedInputTwo); //converted 2nd input of calculation into a number
 
             console.log(`Calculating: ${convInputOne} ${storedOperation} ${convInputTwo}`);
             
@@ -81,7 +99,7 @@ b.addEventListener('click', function pressed(event){
                     storedInputOne=null;
                     storedInputTwo=null;
                     storedOperation=null;
-                    display.textContent=calculationResult;
+                    
                     shouldReplaceDisplay=true;
                     console.log("Division by zero error occurred."); 
                     return;
@@ -95,19 +113,24 @@ b.addEventListener('click', function pressed(event){
                     storedOperation=null;
                     shouldReplaceDisplay=true;
             }
-            display.textContent = calculationResult;
+            display.textContent = calculationResult; //displays calculation result
         }
          
     } else if(clickedValue==="AC"){
-        storedInputOne=null;
-        storedInputTwo=null;
-        storedOperation=null;
-        currentInput=0;
-        shouldReplaceDisplay=true;
-        display.textContent = "0";
-        console.log("Calculator cleared (AC pressed). State reset.");
+         allClear();
     
-    } else if(clickedValue==="squarert"){
+    } else if(clickedValue==="DEL"){
+        
+        function deleteFun (){
+            const inputDel = display.textContent.slice(0, -1);
+            return inputDel;
+        }
+
+        display.textContent = deleteFun();
+
+    } if(display.textContent===""){
+            allClear(); //resets to 0 after all numbers deleted
+        } else if(clickedValue==="squarert"){
         
         function squareRoot (){
         

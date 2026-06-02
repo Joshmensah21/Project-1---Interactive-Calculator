@@ -1,3 +1,5 @@
+//THINGS TO FIX: When deleting a number a few times and then operating on it, calculation is still using the value we deleted.
+
 const display = document.getElementById('display');
 const buttons = document.querySelectorAll('#buttons button');
 
@@ -75,21 +77,22 @@ b.addEventListener('click', function pressed(event){
             if (storedOperation === "+"){
                 calculationResult = convInputOne + convInputTwo;
                 //prepare for new "chained" calculation//
-                storedInputOne=calculationResult;
+                storedInputOne=calculationResult; //allows calculator to remember the last calculated answer for chained calculations
                 storedInputTwo=null;
                 storedOperation=null;
                 shouldReplaceDisplay=true;
+
             } else if(storedOperation === "-"){
                 calculationResult = convInputOne - convInputTwo;
                 //prepare for new "chained" calculation//
-                storedInputOne=calculationResult;
+                storedInputOne=calculationResult; //allows calculator to remember the last calculated answer for chained calculations
                 storedInputTwo=null;
                 storedOperation=null;
                 shouldReplaceDisplay=true;
             } else if(storedOperation === "*"){
                 calculationResult = convInputOne * convInputTwo;
                 //prepare for new "chained" calculation//
-                storedInputOne=calculationResult;
+                storedInputOne=calculationResult; //allows calculator to remember the last calculated answer for chained calculations
                 storedInputTwo=null;
                 storedOperation=null;
                 shouldReplaceDisplay=true;
@@ -122,15 +125,18 @@ b.addEventListener('click', function pressed(event){
     } else if(clickedValue==="DEL"){
         
         function deleteFun (){
-            const inputDel = display.textContent.slice(0, -1);
-            return inputDel;
+            currentInput = currentInput.slice(0, -1);
+            
+            return currentInput;
         }
 
         display.textContent = deleteFun();
 
     } if(display.textContent===""){
+
             allClear(); //resets to 0 after all numbers deleted
-        } else if(clickedValue==="squarert"){
+
+    } else if(clickedValue==="squarert"){
         
         function squareRoot (){
         
@@ -138,6 +144,14 @@ b.addEventListener('click', function pressed(event){
             return Math.sqrt(inputNum);
         }
         display.textContent = squareRoot();
+
+    } else if(clickedValue==="percent"){
+        function percent(){
+            currentInput = currentInput * 0.01;
+            return currentInput;
+        }
+        display.textContent = percent();
+
     }
 } 
     )
